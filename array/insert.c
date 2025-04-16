@@ -1,32 +1,44 @@
-#include <stdio.h>
-
-int main() {
-    int array[100], size, i, position, value;
-
-    printf("Enter number of elements in the array: ");
-    scanf("%d", &size);
-
-    printf("Enter %d elements: ", size);
-    for (i = 0; i < size; i++) {
-        scanf("%d", &array[i]);
+#include<stdio.h>
+void input_array(int n, int arr[]){
+    printf("Enter %d elements: ",n);
+    for (int i = 0; i <n ; i++)
+    {
+        scanf("%d",&arr[i]);
     }
-
-    printf("Enter the position (1 to %d) to insert : ", size + 1);
-    scanf("%d", &position);
-
-    printf("Enter the value to insert: ");
+}
+void print_array(int n, int arr[]){
+    printf("The array elements are: ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ",arr[i]);
+    }
+}
+int main(){
+    int n,position,value,j;
+    printf("Enter number of elements: ");
+    scanf("%d",&n);
+    int arr[n];
+    input_array(n,arr);
+    print_array(n,arr);
+    printf("\nEnter position to insert : ");
+    scanf(" %d",&position);
+    printf("\nEnter the value to insert: ");
     scanf("%d", &value);
-
-    for (i = size; i >= position; i--) {
-        array[i] = array[i - 1];
+    position = position -1;
+    if(position>n){
+        arr[n] = value;
+        n = n+1;
     }
-
-    array[position - 1] = value;
-    size++;
-
-    printf("Array after insertion: ");
-    for (i = 0; i < size; i++) {
-        printf("%d ", array[i]);
+    else {
+        j = n;
+        while (j > position) {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        arr[position] = value;
+        n = n + 1;
     }
-    return 0;
+    printf("After insert new value: ");
+    print_array(n, arr);
+return 0;
 }
